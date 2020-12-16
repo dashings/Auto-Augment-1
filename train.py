@@ -30,10 +30,12 @@ def get_data_loader(args, policy_provider):
 	
 	trainset = dset.CIFAR10(root=args.data_dir, train=True, download=False, transform=train_transform)
 	train_queue = torch.utils.data.DataLoader(trainset, batch_size=args.batch_size,
-	                                          shuffle=True, pin_memory=True, num_workers=8)
+						  shuffle=True, pin_memory=True)
+# 	                                          shuffle=True, pin_memory=True, num_workers=8)
 	valset = dset.CIFAR10(root=args.data_dir, train=False, download=False, transform=valid_transform)
 	valid_queue = torch.utils.data.DataLoader(valset, batch_size=args.batch_size,
-	                                          shuffle=False, pin_memory=True, num_workers=8)
+						  shuffle=False, pin_memory=True)
+# 	                                          shuffle=False, pin_memory=True, num_workers=8)
 	
 	return PrefetchedWrapper(train_queue),len(train_queue), PrefetchedWrapper(valid_queue), len(valid_queue), train_transform
 
